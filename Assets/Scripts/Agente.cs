@@ -104,8 +104,8 @@ namespace UCM.IAV.Movimiento {
             if (cuerpoRigido == null)
                 return;
 
-            Vector3 displacement = velocidad * Time.deltaTime;
-            orientacion += rotacion * Time.deltaTime;
+            Vector3 displacement = velocidad * Time.fixedDeltaTime;
+            orientacion += rotacion * Time.fixedDeltaTime;
             // Necesitamos "constreñir" inteligentemente la orientación al rango (0, 360)
             if (orientacion < 0.0f)
                 orientacion += 360.0f;
