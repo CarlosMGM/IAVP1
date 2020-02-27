@@ -8,28 +8,26 @@
    Autor: Federico Peinado 
    Contacto: email@federicopeinado.com
 */
+
+using UnityEngine;
+
 namespace UCM.IAV.Movimiento
 {
-
-    using UnityEngine;
-
     /// <summary>
-    /// Clara para el comportamiento de agente que consiste en ser el jugador
+    ///     Clara para el comportamiento de agente que consiste en ser el jugador
     /// </summary>
     public class PlayerBehavior : ComportamientoAgente
-    {
+	{
         /// <summary>
-        /// Obtiene la dirección
+        ///     Obtiene la dirección
         /// </summary>
         /// <returns></returns>
         public override Direccion GetDireccion()
-        {
-            Direccion direccion = new Direccion();
-            direccion.lineal.x = Input.GetAxis("Horizontal");
-            direccion.lineal.z = Input.GetAxis("Vertical");
-            direccion.lineal.Normalize(); // Normalizar el vector
-            direccion.lineal *= agente.aceleracionMax;
-            return direccion;
-        }
-    }
+		{
+			var direccion = new Direccion {lineal = {x = Input.GetAxis("Horizontal"), z = Input.GetAxis("Vertical")}};
+			direccion.lineal.Normalize(); // Normalizar el vector
+			direccion.lineal *= agente.aceleracionMax;
+			return direccion;
+		}
+	}
 }

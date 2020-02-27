@@ -8,87 +8,96 @@
    Autor: Federico Peinado 
    Contacto: email@federicopeinado.com
 */
+
+using UnityEngine;
+
 namespace UCM.IAV.Movimiento
 {
-
     /// <summary>
-    /// Clase para modelar el comportamiento de SEGUIR a otro agente
+    ///     Clase para modelar el comportamiento de SEGUIR a otro agente
     /// </summary>
-	public class Seguir : ComportamientoAgente
+    public class Seguir : ComportamientoAgente
 	{
-		/// <summary>
-        /// Obtiene la dirección
+        /// <summary>
+        ///     Obtiene la dirección
         /// </summary>
         /// <returns></returns>
-        float cooldown = 1;
-        float count = 1;
-        UnityEngine.Vector3 dir = UnityEngine.Vector3.zero;
-        public override Direccion GetDireccion()
-        {
-            Direccion direccion = new Direccion();
-            int layerMask = 1 << 8;
-            
-            layerMask = ~layerMask;
+        private float cooldown = 1;
 
-            UnityEngine.RaycastHit hit;
-            
-            count += 0.5f * UnityEngine.Time.deltaTime;
-            //UnityEngine.Physics.Raycast(transform.position, objetivo.transform.position, out hit, 2, layerMask);
-            UnityEngine.Debug.DrawRay(transform.position, (objetivo.transform.position - transform.position) * 2, UnityEngine.Color.red);
-            if (true /*count >= cooldown*/)
-            {
-                count = 0;
-                //direccion.lineal = objetivo.transform.position - transform.position;
-                if (UnityEngine.Physics.Raycast(transform.position, (objetivo.transform.position - transform.position), out hit, 2.0f, layerMask))
-                {
-                    direccion.lineal = objetivo.transform.position - transform.position;
-                    float i = UnityEngine.Random.Range(-1.0f, 1.0f);
-                    UnityEngine.Vector3 newPath = UnityEngine.Vector3.zero /*hit.transform.position*/;
-                    //print(hit.transform.eulerAngles.y);
-                    if (i > 0)
-                    {
-                        newPath = new UnityEngine.Vector3(UnityEngine.Mathf.Cos(hit.transform.eulerAngles.y) , 0, UnityEngine.Mathf.Sin(hit.transform.eulerAngles.y));
+		private float count = 1;
+		private Vector3 dir = Vector3.zero;
 
-                        //direccion.lineal = newPath;
-                    }
-                    else
-                    {
-                        newPath = new UnityEngine.Vector3(UnityEngine.Mathf.Cos(hit.transform.eulerAngles.y), 0, UnityEngine.Mathf.Sin(hit.transform.eulerAngles.y));
-                        //newPath -= new UnityEngine.Vector3((UnityEngine.Mathf.Cos(hit.transform.rotation.y) * (hit.transform.localScale.x)) / 2,
-                        //                                    0, (UnityEngine.Mathf.Sin(hit.transform.rotation.y) * (hit.transform.localScale.y)) / 2);
-                        //direccion.lineal = newPath/* - transform.position*/;
-                    }
-                    //direccion.lineal.Normalize();
-                    print(newPath);
-                    direccion.lineal = newPath;
-                    
-                }
-                else
-                {
-                    direccion.lineal = objetivo.transform.position - transform.position;
-                }
-                dir = direccion.lineal;
-            }
-            else
-            {
-                direccion.lineal = dir;
-            }
-            direccion.lineal.Normalize();
-            direccion.lineal = direccion.lineal * agente.aceleracionMax;
-            return direccion;
-        }
+		public override Direccion GetDireccion()
+		{
+			var direccion = new Direccion();
+			var layerMask = 1 << 8;
 
-        public virtual void SeguirJugador()
-        {
-            Direccion util = new Direccion();
-            util.lineal = objetivo.transform.position - transform.position;
-            float xUtil, yUtil;
-            xUtil = UnityEngine.Mathf.Abs(util.lineal.x);
-            yUtil = UnityEngine.Mathf.Abs(util.lineal.z);
-            if ((xUtil + yUtil) > 3)
-            {
-                agente.run();
-                if (agente.mezclarPorPeso)
+			layerMask = ~layerMask;
+
+			RaycastHit hit;
+
+			count += 0.5f * Time.deltaTime;
+			//UnityEngine.Physics.Raycast(transform.position, objetivo.transform.position, out hit, 2, layerMask);
+			var tf = transform;
+			Debug.DrawRay(tf.position, (objetivo.transform.position - tf.position) * 2, Color.red);
+			if (true /*count >= cooldown*/)
+			{
+				count = 0;
+				//direccion.lineal = objetivo.transform.position - transform.position;
+				if (Physics.Raycast(transform.position, objetivo.transform.position - transform.position, out hit, 2.0f,
+					layerMask))
+				{
+					direccion.lineal = objetivo.transform.position - transform.position;
+					var i = Random.Range(-1.0f, 1.0f);
+					var newPath = Vector3.zero /*hit.transform.position*/;
+					//print(hit.transform.eulerAngles.y);
+					var eulerAngles = hit.transform.eulerAngles;
+					if (i > 0)
+					{
+						newPath = new Vector3(Mathf.Cos(eulerAngles.y), 0,
+							Mathf.Sin(eulerAngles.y));
+						//direccion.lineal = newPath;
+					}
+
+					else
+					{
+						newPath = new Vector3(Mathf.Cos(eulerAngles.y), 0,
+							Mathf.Sin(eulerAngles.y));
+					}
+
+					//newPath -= new UnityEngine.Vector3((UnityEngine.Mathf.Cos(hit.transform.rotation.y) * (hit.transform.localScale.x)) / 2,
+					//                                    0, (UnityEngine.Mathf.Sin(hit.transform.rotation.y) * (hit.transform.localScale.y)) / 2);
+					//direccion.lineal = newPath/* - transform.position*/;
+					//direccion.lineal.Normalize();
+					print(newPath);
+					direccion.lineal = newPath;
+				}
+				else
+				{
+					direccion.lineal = objetivo.transform.position - transform.position;
+				}
+
+				dir = direccion.lineal;
+			}
+			else
+			{
+				direccion.lineal = dir;
+			}
+
+			direccion.lineal.Normalize();
+			direccion.lineal *= agente.aceleracionMax;
+			return direccion;
+		}
+
+		public virtual void SeguirJugador()
+		{
+			var util = new Direccion {lineal = objetivo.transform.position - transform.position};
+			var xUtil = Mathf.Abs(util.lineal.x);
+			var yUtil = Mathf.Abs(util.lineal.z);
+			if (xUtil + yUtil > 3)
+			{
+				agente.Run();
+				if (agente.mezclarPorPeso)
 					agente.SetDireccion(GetDireccion(), peso);
 				else if (agente.mezclarPorPrioridad)
 					agente.SetDireccion(GetDireccion(), prioridad);
@@ -96,10 +105,9 @@ namespace UCM.IAV.Movimiento
 					agente.SetDireccion(GetDireccion());
 			}
 			else
-            {
-                agente.stop();
-            }
-
-        }
-    }
+			{
+				agente.Stop();
+			}
+		}
+	}
 }
