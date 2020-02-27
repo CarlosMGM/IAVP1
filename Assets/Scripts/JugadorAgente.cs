@@ -38,8 +38,9 @@ namespace UCM.IAV.Movimiento
         /// <summary>
         /// Al despertar, establecer el cuerpo rígido
         /// </summary>
-        private void Awake()
+        private new void Awake()
         {
+            base.Awake();
             _cuerpoRigido = GetComponent<Rigidbody>();
         }
 
@@ -87,7 +88,7 @@ namespace UCM.IAV.Movimiento
         /// <summary>
         /// En cada parte tardía del tick, encarar el agente
         /// </summary>
-        public override void LateUpdate()
+        public new void LateUpdate()
         {
             transform.LookAt(transform.position + velocidad);
         }

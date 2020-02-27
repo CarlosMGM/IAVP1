@@ -8,6 +8,7 @@
    Autor: Federico Peinado 
    Contacto: email@federicopeinado.com
 */
+
 namespace UCM.IAV.Movimiento {
 
     using System;
@@ -18,6 +19,7 @@ namespace UCM.IAV.Movimiento {
 /// <summary>
 /// La clase Agente es responsable de modelar los agentes y gestionar todos los comportamientos asociados para combinarlos (si es posible) 
 /// </summary>
+    [RequireComponent(typeof(Rigidbody))]
     public class Agente : MonoBehaviour {
         /// <summary>
         /// Mezclar por peso
@@ -72,7 +74,7 @@ namespace UCM.IAV.Movimiento {
         /// <summary>
         /// Valor de direcci�n / direccionamiento
         /// </summary>
-        [Tooltip("Direcci�n.")]
+        [Tooltip("Direccion.")]
         protected Direccion direccion;
         /// <summary>
         /// Grupos de direcciones, agrupados por valor de prioridad
@@ -98,12 +100,12 @@ namespace UCM.IAV.Movimiento {
         /// <summary>
         /// Al comienzo, se inicialian algunas variables
         /// </summary>
-        void Start()
+        public void Awake()
         {
             velocidad = Vector3.zero;
             direccion = new Direccion();
             grupos = new Dictionary<int, List<Direccion>>();
-            cuerpoRigido = GetComponent<Rigidbody>(); // Cojo el cuerpo r�gido
+            cuerpoRigido = GetComponent<Rigidbody>();
         }
 
         /// <summary>
@@ -153,7 +155,7 @@ namespace UCM.IAV.Movimiento {
         /// <summary>
         /// En cada parte tard�a del tick, hace tareas de correcci�n num�rica (ajustar a los m�ximos, la combinaci�n etc.
         /// </summary>
-        public virtual void LateUpdate()
+        public void LateUpdate()
         {
             if (mezclarPorPrioridad)
             {
@@ -166,7 +168,7 @@ namespace UCM.IAV.Movimiento {
             if (velocidad.magnitude > velocidadMax)
             {
                 velocidad.Normalize();
-                velocidad = velocidad * velocidadMax;
+                velocidad *= velocidadMax;
             }
 
             if (rotacion > rotacionMax)
@@ -174,21 +176,21 @@ namespace UCM.IAV.Movimiento {
                 rotacion = rotacionMax;
             }
 
-            if (direccion.angular == 0.0f)
+            if (Math.Abs(direccion.angular) < 0.1f)
             {
                 rotacion = 0.0f;
             }
 
-            if (direccion.lineal.sqrMagnitude == 0.0f)
-            {
-                velocidad = Vector3.zero;
-            }
+            // if (Math.Abs(direccion.lineal.sqrMagnitude) < 0.1f)
+            // {
+            //     velocidad = Vector3.zero;
+            // }
 
             // En realidad si se quiere cambiar la orientaci�n lo suyo es hacerlo con un comportamiento, no as�:
             transform.LookAt(transform.position + velocidad);
 
             // Se limpia el steering de cara al pr�ximo tick
-            direccion = new Direccion();
+            // direccion = new Direccion();
         }
 
         /// <summary>
@@ -206,8 +208,8 @@ namespace UCM.IAV.Movimiento {
         /// <param name="peso"></param>
         public void SetDireccion(Direccion direccion, float peso)
         {
-            this.direccion.lineal += (peso * direccion.lineal);
-            this.direccion.angular += (peso * direccion.angular);
+            this.direccion.lineal += peso * direccion.lineal;
+            this.direccion.angular += peso * direccion.angular;
         }
 
         /// <summary>

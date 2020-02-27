@@ -12,15 +12,17 @@ namespace UCM.IAV.Movimiento
         protected Seguir seguir;
 
         // Start is called before the first frame update
-        void Start()
+        public void Start()
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent <JugadorAgente>();
             seguir = GetComponent<Seguir>();
         }
 
         // Update is called once per frame
-        void Update()
+        public new void Update()
         {
+            base.Update();
+
             bool sound = player.flauta;
 
             int layerMask = 1 << 8;

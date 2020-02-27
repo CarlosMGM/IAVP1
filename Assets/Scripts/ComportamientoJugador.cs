@@ -3,7 +3,7 @@
    http://www.federicopeinado.com
 
    Este fichero forma parte del material de la asignatura Inteligencia Artificial para Videojuegos.
-   Esta asignatura se imparte en la Facultad de Inform·tica de la Universidad Complutense de Madrid (EspaÒa).
+   Esta asignatura se imparte en la Facultad de Inform√°tica de la Universidad Complutense de Madrid (Espa√±a).
 
    Autor: Federico Peinado 
    Contacto: email@federicopeinado.com
@@ -19,7 +19,7 @@ namespace UCM.IAV.Movimiento
     public class PlayerBehavior : ComportamientoAgente
     {
         /// <summary>
-        /// Obtiene la direcciÛn
+        /// Obtiene la direcci√≥n
         /// </summary>
         /// <returns></returns>
         public override Direccion GetDireccion()

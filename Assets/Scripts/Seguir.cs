@@ -1,4 +1,4 @@
-﻿/*    
+/*    
    Copyright (C) 2020 Federico Peinado
    http://www.federicopeinado.com
 
@@ -14,9 +14,9 @@ namespace UCM.IAV.Movimiento
     /// <summary>
     /// Clase para modelar el comportamiento de SEGUIR a otro agente
     /// </summary>
-    public class Seguir : ComportamientoAgente
-    {
-        /// <summary>
+	public class Seguir : ComportamientoAgente
+	{
+		/// <summary>
         /// Obtiene la dirección
         /// </summary>
         /// <returns></returns>
@@ -89,13 +89,13 @@ namespace UCM.IAV.Movimiento
             {
                 agente.run();
                 if (agente.mezclarPorPeso)
-                    agente.SetDireccion(GetDireccion(), peso);
-                else if (agente.mezclarPorPrioridad)
-                    agente.SetDireccion(GetDireccion(), prioridad);
-                else
-                    agente.SetDireccion(GetDireccion());
-            }
-            else
+					agente.SetDireccion(GetDireccion(), peso);
+				else if (agente.mezclarPorPrioridad)
+					agente.SetDireccion(GetDireccion(), prioridad);
+				else
+					agente.SetDireccion(GetDireccion());
+			}
+			else
             {
                 agente.stop();
             }
