@@ -77,5 +77,29 @@ namespace UCM.IAV.Movimiento
             direccion.lineal = direccion.lineal * agente.aceleracionMax;
             return direccion;
         }
+
+        public virtual void SeguirJugador()
+        {
+            Direccion util = new Direccion();
+            util.lineal = objetivo.transform.position - transform.position;
+            float xUtil, yUtil;
+            xUtil = UnityEngine.Mathf.Abs(util.lineal.x);
+            yUtil = UnityEngine.Mathf.Abs(util.lineal.z);
+            if ((xUtil + yUtil) > 3)
+            {
+                agente.run();
+                if (agente.mezclarPorPeso)
+                    agente.SetDireccion(GetDireccion(), peso);
+                else if (agente.mezclarPorPrioridad)
+                    agente.SetDireccion(GetDireccion(), prioridad);
+                else
+                    agente.SetDireccion(GetDireccion());
+            }
+            else
+            {
+                agente.stop();
+            }
+
+        }
     }
 }

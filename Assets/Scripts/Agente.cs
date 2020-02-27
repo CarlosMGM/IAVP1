@@ -179,10 +179,10 @@ namespace UCM.IAV.Movimiento {
                 rotacion = 0.0f;
             }
 
-            //if (direccion.lineal.sqrMagnitude == 0.0f)
-            //{
-            //   // velocidad = Vector3.zero;
-            //}
+            if (direccion.lineal.sqrMagnitude == 0.0f)
+            {
+                velocidad = Vector3.zero;
+            }
 
             // En realidad si se quiere cambiar la orientaci�n lo suyo es hacerlo con un comportamiento, no as�:
             transform.LookAt(transform.position + velocidad);

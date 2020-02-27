@@ -33,6 +33,7 @@ namespace UCM.IAV.Movimiento
         /// Dirección del movimiento
         /// </summary>
         private Vector3 _dir;
+        public bool flauta = false;
 
         /// <summary>
         /// Al despertar, establecer el cuerpo rígido
@@ -74,12 +75,12 @@ namespace UCM.IAV.Movimiento
         {
             if (_cuerpoRigido == null)
             {
-                transform.Translate(velocidad * Time.deltaTime, Space.World);
+                transform.Translate(velocidad * Time.fixedDeltaTime, Space.World);
             }
             else
             {
                 // El cuerpo rígido no podrá estar marcado como cinemático
-                _cuerpoRigido.AddForce(velocidad * Time.deltaTime, ForceMode.VelocityChange); // Cambiamos directamente la velocidad, sin considerar la masa (pidiendo que avance esa distancia de golpe)
+                _cuerpoRigido.AddForce(velocidad * Time.fixedDeltaTime, ForceMode.VelocityChange); // Cambiamos directamente la velocidad, sin considerar la masa (pidiendo que avance esa distancia de golpe)
             } 
         }
 

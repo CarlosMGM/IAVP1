@@ -51,28 +51,7 @@ namespace UCM.IAV.Movimiento
         /// <summary>
         /// En cada tick, establecer la direcci�n que corresponde al agente, con peso o prioridad si se est�n usando
         /// </summary>
-        public virtual void SeguirJugador()
-        {
-            Direccion util = new Direccion();
-            util.lineal = objetivo.transform.position - transform.position;
-            float xUtil, yUtil;
-            xUtil = UnityEngine.Mathf.Abs(util.lineal.x);
-            yUtil = UnityEngine.Mathf.Abs(util.lineal.z);
-            if ((xUtil + yUtil) > 3)
-            {
-                agente.run();
-                if (agente.mezclarPorPeso)
-                    agente.SetDireccion(GetDireccion(), peso);
-                else if (agente.mezclarPorPrioridad)
-                    agente.SetDireccion(GetDireccion(), prioridad);
-                else
-                    agente.SetDireccion(GetDireccion());
-            } else
-            {
-                agente.stop();
-            }
-
-        }
+       
 
         /// <summary>
         /// Devuelve la direccion calculada
