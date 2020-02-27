@@ -3,7 +3,7 @@
    http://www.federicopeinado.com
 
    Este fichero forma parte del material de la asignatura Inteligencia Artificial para Videojuegos.
-   Esta asignatura se imparte en la Facultad de Informática de la Universidad Complutense de Madrid (España).
+   Esta asignatura se imparte en la Facultad de Informï¿½tica de la Universidad Complutense de Madrid (Espaï¿½a).
 
    Autor: Federico Peinado 
    Contacto: email@federicopeinado.com
@@ -34,26 +34,44 @@ namespace UCM.IAV.Movimiento
         /// Agente que hace uso del comportamiento
         /// </summary>
         protected Agente agente;
+        /// <summary>
+        /// ï¿½Se estï¿½ tocando la flauta?
+        /// </summary>
+        protected bool flauta;
 
         /// <summary>
-        /// Al despertar, establecer el agente (script) que hará uso del comportamiento
+        /// Al despertar, establecer el agente (script) que harï¿½ uso del comportamiento
         /// </summary>
         public virtual void Awake()
         {
+            flauta = false;
             agente = gameObject.GetComponent<Agente>();
         }
 
         /// <summary>
-        /// En cada tick, establecer la dirección que corresponde al agente, con peso o prioridad si se están usando
+        /// En cada tick, establecer la direcciï¿½n que corresponde al agente, con peso o prioridad si se estï¿½n usando
         /// </summary>
-        public virtual void Update()
+        public virtual void SeguirJugador()
         {
-            if (agente.mezclarPorPeso)
-                agente.SetDireccion(GetDireccion(), peso);
-            else if (agente.mezclarPorPrioridad)
-                agente.SetDireccion(GetDireccion(), prioridad);
-            else
-                agente.SetDireccion(GetDireccion());
+            Direccion util = new Direccion();
+            util.lineal = objetivo.transform.position - transform.position;
+            float xUtil, yUtil;
+            xUtil = UnityEngine.Mathf.Abs(util.lineal.x);
+            yUtil = UnityEngine.Mathf.Abs(util.lineal.z);
+            if ((xUtil + yUtil) > 3)
+            {
+                agente.run();
+                if (agente.mezclarPorPeso)
+                    agente.SetDireccion(GetDireccion(), peso);
+                else if (agente.mezclarPorPrioridad)
+                    agente.SetDireccion(GetDireccion(), prioridad);
+                else
+                    agente.SetDireccion(GetDireccion());
+            } else
+            {
+                agente.stop();
+            }
+
         }
 
         /// <summary>
@@ -66,7 +84,7 @@ namespace UCM.IAV.Movimiento
         }
 
         /// <summary>
-        /// Asocia la rotación al rango de 360 grados
+        /// Asocia la rotaciï¿½n al rango de 360 grados
         /// </summary>
         /// <param name="rotacion"></param>
         /// <returns></returns>
@@ -84,7 +102,7 @@ namespace UCM.IAV.Movimiento
         }
 
         /// <summary>
-        /// Cambia el valor real de la orientación a un Vector3 
+        /// Cambia el valor real de la orientaciï¿½n a un Vector3 
         /// </summary>
         /// <param name="orientacion"></param>
         /// <returns></returns>

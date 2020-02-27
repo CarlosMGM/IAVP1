@@ -22,6 +22,10 @@ namespace UCM.IAV.Movimiento
     public class JugadorAgente : Agente
     {
         /// <summary>
+        /// Animales controlados
+        /// </summary>
+        public Agente[] animales;
+        /// <summary>
         /// El componente de cuerpo rígido
         /// </summary>
         private Rigidbody _cuerpoRigido;
@@ -47,7 +51,20 @@ namespace UCM.IAV.Movimiento
             velocidad.z = Input.GetAxis("Vertical");
             // Faltaba por normalizar el vector
             velocidad.Normalize();
-            velocidad *= velocidadMax; 
+            velocidad *= velocidadMax;
+            if (Input.GetKey(KeyCode.Space))
+            {
+                foreach (Agente i in animales)
+                {
+                    i.soundPlaying();
+                }
+            } else
+            {
+                foreach (Agente i in animales)
+                {
+                    i.soundStop();
+                }
+            }
         }
 
         /// <summary>
@@ -57,12 +74,12 @@ namespace UCM.IAV.Movimiento
         {
             if (_cuerpoRigido == null)
             {
-                transform.Translate(velocidad * Time.fixedDeltaTime, Space.World);
+                transform.Translate(velocidad * Time.deltaTime, Space.World);
             }
             else
             {
                 // El cuerpo rígido no podrá estar marcado como cinemático
-                _cuerpoRigido.AddForce(velocidad * Time.fixedDeltaTime, ForceMode.VelocityChange); // Cambiamos directamente la velocidad, sin considerar la masa (pidiendo que avance esa distancia de golpe)
+                _cuerpoRigido.AddForce(velocidad * Time.deltaTime, ForceMode.VelocityChange); // Cambiamos directamente la velocidad, sin considerar la masa (pidiendo que avance esa distancia de golpe)
             } 
         }
 
