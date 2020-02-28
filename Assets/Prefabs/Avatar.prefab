@@ -231,17 +231,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d54b49818fab3e94d85c182a4abb2d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aceleracionAngularMax: 1
+  aceleracionMax: 5
   mezclarPorPeso: 0
   mezclarPorPrioridad: 0
-  umbralPrioridad: 0
-  velocidadMax: 10
-  aceleracionMax: 5
-  rotacionMax: 2
-  aceleracionAngularMax: 1
   orientacion: 0
   rotacion: 0
-  velocidad: {x: 0, y: 0, z: 0}
+  rotacionMax: 2
   sound: 0
+  umbralPrioridad: 0
+  velocidad: {x: 0, y: 0, z: 0}
+  velocidadMax: 10
   animales:
   - {fileID: 0}
   - {fileID: 0}

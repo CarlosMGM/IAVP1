@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 3589434366512982435}
   - component: {fileID: 9150490422996881721}
   - component: {fileID: 9150490422996881724}
+  - component: {fileID: 9046905761650073037}
   m_Layer: 0
   m_Name: Perro
   m_TagString: Untagged
@@ -277,3 +278,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &9046905761650073037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9150490422996881725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344c67c77c0493f47a064ffebeca0c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformObjetivo: {fileID: 6217083257220722758, guid: 24679e35ff2312144bf8f28e59809afd,
+    type: 3}
+  peso: 1
+  prioridad: 1
