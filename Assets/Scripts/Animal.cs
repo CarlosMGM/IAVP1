@@ -20,9 +20,7 @@ namespace UCM.IAV.Movimiento
 		public new void Update()
 		{
 			base.Update();
-
-			var sound = player.flauta;
-
+            
 			var layerMask = 1 << 8;
 
 			// This would cast rays only against colliders in layer 8.
