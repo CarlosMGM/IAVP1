@@ -162,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aceleracionAngularMax: 1
   aceleracionMax: 10
-  mezclarPorPeso: 0
+  mezclarPorPeso: 1
   mezclarPorPrioridad: 0
   orientacion: 0
   rotacion: 0
