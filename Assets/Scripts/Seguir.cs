@@ -26,6 +26,10 @@ namespace UCM.IAV.Movimiento
 
 		private float count = 1;
 		private Vector3 dir = Vector3.zero;
+        private float deceleracion = 0;
+        public float radioObjetivo;
+        public float radioFreno;
+        bool freno = false;
 
 		public override Direccion GetDireccion()
 		{
@@ -69,7 +73,6 @@ namespace UCM.IAV.Movimiento
 					//                                    0, (UnityEngine.Mathf.Sin(hit.transform.rotation.y) * (hit.transform.localScale.y)) / 2);
 					//direccion.lineal = newPath/* - transform.position*/;
 					//direccion.lineal.Normalize();
-					print(newPath);
 					direccion.lineal = newPath;
 				}
 				else
@@ -84,17 +87,36 @@ namespace UCM.IAV.Movimiento
 				direccion.lineal = dir;
 			}
 
-			direccion.lineal.Normalize();
-			direccion.lineal *= agente.aceleracionMax;
-			return direccion;
-		}
+            float instanceAcceleration;
+
+            if(direccion.lineal.magnitude > radioFreno)
+            {
+                freno = false;
+                instanceAcceleration = agente.aceleracionMax;
+            }
+            else
+            {
+                if(freno == false)
+                {
+                    deceleracion = -agente.velocidad.sqrMagnitude / (2 * direccion.lineal.magnitude);
+                    freno = true;
+                }
+                instanceAcceleration = deceleracion;
+            }
+
+
+            direccion.lineal.Normalize();
+            direccion.lineal *= instanceAcceleration;
+
+            return direccion;
+        }
 
 		public virtual void SeguirJugador()
 		{
 			var util = new Direccion {lineal = objetivo.transform.position - transform.position};
 			var xUtil = Mathf.Abs(util.lineal.x);
-			var yUtil = Mathf.Abs(util.lineal.z);
-			if (xUtil + yUtil > 3)
+			var zUtil = Mathf.Abs(util.lineal.z);
+			if (xUtil + zUtil > radioObjetivo)
 			{
 				agente.Run();
 				if (agente.mezclarPorPeso)
@@ -106,7 +128,7 @@ namespace UCM.IAV.Movimiento
 			}
 			else
 			{
-				agente.Stop();
+				//agente.Stop();
 			}
 		}
 	}
