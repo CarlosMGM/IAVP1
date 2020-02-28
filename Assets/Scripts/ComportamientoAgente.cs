@@ -31,7 +31,7 @@ namespace UCM.IAV.Movimiento
         /// <summary>
         ///     Objetivo (para aplicar o representar el comportamiento, depende del comportamiento que sea)
         /// </summary>
-        public GameObject objetivo;
+        public Transform transformObjetivo;
 
         /// <summary>
         ///     Peso

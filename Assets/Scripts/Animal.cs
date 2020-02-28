@@ -13,6 +13,7 @@ namespace UCM.IAV.Movimiento
 		{
 			player = GameObject.FindGameObjectWithTag("Player").GetComponent<JugadorAgente>();
 			seguir = GetComponent<Seguir>();
+            seguir.transformObjetivo = player.transform;
 		}
 
 		// Update is called once per frame

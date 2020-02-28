@@ -33,7 +33,7 @@ namespace UCM.IAV.Movimiento
         /// </summary>
         public Agente[] animales;
 
-		public bool flauta;
+		public bool flauta = false;
 
         /// <summary>
         ///     Al despertar, establecer el cuerpo rígido
@@ -54,12 +54,10 @@ namespace UCM.IAV.Movimiento
 			// Faltaba por normalizar el vector
 			velocidad.Normalize();
 			velocidad *= velocidadMax;
-			if (Input.GetKey(KeyCode.Space))
-				foreach (var i in animales)
-					i.SoundPlaying();
-			else
-				foreach (var i in animales)
-					i.SoundStop();
+            if (Input.GetKey(KeyCode.Space))
+                flauta = true;
+            else
+                flauta = false;
 		}
 
         /// <summary>

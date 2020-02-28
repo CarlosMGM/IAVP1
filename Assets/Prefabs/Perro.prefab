@@ -232,10 +232,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e92ec8f463fd84cac92ffd22bc97c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transformObjetivo: {fileID: 6217083257220722758, guid: 24679e35ff2312144bf8f28e59809afd,
+    type: 3}
   peso: 1
   prioridad: 1
-  objetivo: {fileID: 6217083257220722776, guid: 24679e35ff2312144bf8f28e59809afd,
-    type: 3}
+  radioObjetivo: 0
+  radioFreno: 0
 --- !u!114 &9150490422996881721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,17 +250,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0e212d4de2c95846bd2fccf26d461e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aceleracionAngularMax: 1
+  aceleracionMax: 10
   mezclarPorPeso: 0
   mezclarPorPrioridad: 0
-  umbralPrioridad: 0.2
-  velocidadMax: 5
-  aceleracionMax: 10
-  rotacionMax: 2
-  aceleracionAngularMax: 1
   orientacion: 0
   rotacion: 0
-  velocidad: {x: 0, y: 0, z: 0}
+  rotacionMax: 2
   sound: 0
+  umbralPrioridad: 0.2
+  velocidad: {x: 0, y: 0, z: 0}
+  velocidadMax: 5
 --- !u!54 &9150490422996881724
 Rigidbody:
   m_ObjectHideFlags: 0

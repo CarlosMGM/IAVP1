@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 4037903316752259958}
   - component: {fileID: 5254502553424400012}
   - component: {fileID: 4037903316752259960}
+  - component: {fileID: 7232898851980611829}
   - component: {fileID: 4037903316752259957}
   m_Layer: 0
   m_Name: Rata
@@ -125,6 +126,7 @@ Transform:
   m_LocalScale: {x: 0.46757, y: 0.46757, z: 0.46757}
   m_Children:
   - {fileID: 4037903316318017068}
+  - {fileID: 1136797756465045752}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -140,10 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e92ec8f463fd84cac92ffd22bc97c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transformObjetivo: {fileID: 1136797756465045752}
   peso: 1
   prioridad: 1
-  objetivo: {fileID: 6217083257220722776, guid: 24679e35ff2312144bf8f28e59809afd,
-    type: 3}
+  radioObjetivo: 0
+  radioFreno: 0
 --- !u!114 &4037903316752259960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,17 +159,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0d430bc31ce8b429a0261eb6bccb00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aceleracionAngularMax: 1
+  aceleracionMax: 10
   mezclarPorPeso: 0
   mezclarPorPrioridad: 0
-  umbralPrioridad: 0.2
-  velocidadMax: 5
-  aceleracionMax: 10
-  rotacionMax: 2
-  aceleracionAngularMax: 1
   orientacion: 0
   rotacion: 0
-  velocidad: {x: 0, y: 0, z: 0}
+  rotacionMax: 2
   sound: 0
+  umbralPrioridad: 0.2
+  velocidad: {x: 0, y: 0, z: 0}
+  velocidadMax: 5
+--- !u!114 &7232898851980611829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4037903316752259961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39e18dd512ae8654abbe42329f2b5b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transformObjetivo: {fileID: 1136797756465045752}
+  peso: 1
+  prioridad: 1
 --- !u!54 &4037903316752259957
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -275,3 +293,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &4733271812174990688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1136797756465045752}
+  m_Layer: 0
+  m_Name: Objetivo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1136797756465045752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4733271812174990688}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4037903316752259958}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

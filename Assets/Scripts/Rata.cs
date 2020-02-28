@@ -2,10 +2,20 @@
 
 namespace UCM.IAV.Movimiento
 {
-	public class Rata : Animal
+    [RequireComponent(typeof(RandomMovement))]
+    public class Rata : Animal
 	{
-		// Update is called once per frame
-		public new void Update()
+        RandomMovement randomMovement;
+
+        new private void Start()
+        {
+            base.Start();
+            randomMovement = GetComponent<RandomMovement>();
+            randomMovement.transformObjetivo = transform.parent.GetChild(0);
+        }
+
+        // Update is called once per frame
+        public new void Update()
 		{
 			base.Update();
 
@@ -16,7 +26,7 @@ namespace UCM.IAV.Movimiento
 			else
 			{
 				Run();
-				var dir = new Direccion {lineal = new Vector3(-1.0f, 0.0f, -1.0f)};
+                var dir = randomMovement.GetDireccion();
 				if (mezclarPorPeso)
 					SetDireccion(dir, seguir.peso);
 				else if (mezclarPorPrioridad)
