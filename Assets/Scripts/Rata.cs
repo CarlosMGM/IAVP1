@@ -6,12 +6,14 @@ namespace UCM.IAV.Movimiento
     public class Rata : Animal
 	{
         RandomMovement randomMovement;
+        Separacion separacion;
 
         new private void Start()
         {
             base.Start();
             randomMovement = GetComponent<RandomMovement>();
             randomMovement.transformObjetivo = transform.parent.GetChild(0);
+            separacion = GetComponent<Separacion>();
         }
 
         // Update is called once per frame
@@ -22,6 +24,7 @@ namespace UCM.IAV.Movimiento
 			if (sound)
 			{
 				seguir.SeguirJugador();
+                separacion.IrConDistancia();
 			}
 			else
 			{
